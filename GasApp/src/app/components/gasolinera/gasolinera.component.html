@@ -1,4 +1,11 @@
 <div>
-    <p>        
-    </p>
+    <ul *ngFor="let gaso of listaGasolineras">
+        <li>Nombre : {{gaso['Rótulo']}}</li>
+        <li>Dirección : {{gaso['Dirección']}}</li>
+        <ul>
+            <li>Gasolina 95 : {{gaso['Precio Gasolina 95 E5']}} €</li>
+            <li>Gasoleo : {{gaso['Precio Gasoleo A']}} €</li>
+            <li>Hidrogeno : {{gaso['Precio Hidrogeno']}} €</li>
+        </ul>
+    </ul>
 </div>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Gasolinera } from 'src/app/interfaces/gasolinera';
+import { ListaEESSPrecio } from 'src/app/interfaces/gasolinera';
 import { GasolineraService } from 'src/app/services/gasolinera.service';
 
 @Component({
@@ -9,17 +9,14 @@ import { GasolineraService } from 'src/app/services/gasolinera.service';
 })
 export class GasolineraComponent implements OnInit {
 
-  listaGasolineras: Gasolinera[] = [];
+  listaGasolineras: ListaEESSPrecio[] = [];
 
   constructor(private gasolineraService: GasolineraService) { }
 
   ngOnInit(): void {
-  }
-
-  getGasolinera(){
     this.gasolineraService.getGasolineras().subscribe(resp => {
       this.listaGasolineras = resp.ListaEESSPrecio;
+      debugger;
     })
   }
-
 }

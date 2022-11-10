@@ -1,4 +1,4 @@
-export interface Gasolinera {
+export interface ListaEESSPrecio {
         'C.P.': string;
         'Dirección': string;
         'Horario': string;
@@ -35,7 +35,9 @@ export interface Gasolinera {
 
 export interface GasolineraResponse {
         Fecha: string;
-        ListaEESSPrecio: Gasolinera[];
+        ListaEESSPrecio: ListaEESSPrecio[];
+        Nota: string;
+        ResultadoConsulta: string;
 }
 
 
