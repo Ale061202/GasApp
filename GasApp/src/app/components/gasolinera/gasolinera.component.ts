@@ -13,6 +13,14 @@ export class GasolineraComponent implements OnInit {
 
   constructor(private gasolineraService: GasolineraService) { }
 
+  formatLabel(value: number) {
+    if (value >= 1000) {
+      return Math.round(value / 1000) + 'k';
+    }
+
+    return value;
+  }
+
   ngOnInit(): void {
     this.gasolineraService.getGasolineras().subscribe(resp => {
       this.listaGasolineras = resp.ListaEESSPrecio;

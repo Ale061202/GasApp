@@ -1,11 +1,19 @@
+<mat-slider
+  thumbLabel
+  [displayWith]="formatLabel"
+  tickInterval="1000"
+  step="1"
+  min="0"
+  max="100000"
+  aria-label="units"></mat-slider>
 <div>
-    <ul *ngFor="let gaso of listaGasolineras">
-        <li>Nombre : {{gaso['Rótulo']}}</li>
-        <li>Dirección : {{gaso['Dirección']}}</li>
-        <ul>
-            <li>Gasolina 95 : {{gaso['Precio Gasolina 95 E5']}} €</li>
-            <li>Gasoleo : {{gaso['Precio Gasoleo A']}} €</li>
-            <li>Hidrogeno : {{gaso['Precio Hidrogeno']}} €</li>
-        </ul>
-    </ul>
+    <mat-card *ngFor="let gaso of listaGasolineras">
+        <mat-card-title>Nombre : {{gaso['Rótulo']}}</mat-card-title>
+        <mat-card-content>
+            <p>Dirección : {{gaso['Dirección']}}<p>        
+            <p>Gasolina 95 : {{gaso['Precio Gasolina 95 E5']}} €<p>
+            <p>Gasoleo : {{gaso['Precio Gasoleo A']}} €<p>
+            <p>Hidrogeno : {{gaso['Precio Hidrogeno']}} €<p>
+        </mat-card-content>
+    </mat-card>
 </div>
