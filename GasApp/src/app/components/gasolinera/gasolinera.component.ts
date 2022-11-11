@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ListaEESSPrecio } from 'src/app/interfaces/gasolinera';
+import { ListaEESSPrecio, ProvinciaResponse } from 'src/app/interfaces/gasolinera.interface';
 import { GasolineraService } from 'src/app/services/gasolinera.service';
 
 @Component({
@@ -10,6 +10,9 @@ import { GasolineraService } from 'src/app/services/gasolinera.service';
 export class GasolineraComponent implements OnInit {
 
   listaGasolineras: ListaEESSPrecio[] = [];
+  listaGasolinerasFiltered: ListaEESSPrecio[] = [];
+  listaProvincias: ProvinciaResponse[] = [];
+  provinciasLista: string[] = [];
 
   constructor(private gasolineraService: GasolineraService) { }
 
@@ -22,9 +25,26 @@ export class GasolineraComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getGasolinera();
+  }
+
+  getGasolinera(){
     this.gasolineraService.getGasolineras().subscribe(resp => {
       this.listaGasolineras = resp.ListaEESSPrecio;
-      debugger;
     })
+  }
+
+  filterProvincia(){
+    this.listaGasolineras = this.listaGasolinerasFiltered;
+    if(this.listaGasolineras.length > 0){
+      let listaProvincias: ListaEESSPrecio[] = this.listaGasolineras.filter(lista => this.provinciasLista.includes(lista.IDProvincia))
+      this.listaGasolineras = listaProvincias
+    }else{
+      this.getGasolinera();
+    }
+  }
+
+  quitarFiltro(){
+    this.listaGasolineras = this.listaGasolinerasFiltered;
   }
 }
