@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ListaEESSPrecio, ProvinciaResponse } from 'src/app/interfaces/gasolinera.interface';
+import { ListaEESSPrecio } from 'src/app/interfaces/gasolinera.interface';
+import { ProvinciaResponse } from 'src/app/interfaces/provincia.interface';
 import { GasolineraService } from 'src/app/services/gasolinera.service';
 
 @Component({
@@ -13,38 +14,43 @@ export class GasolineraComponent implements OnInit {
   listaGasolinerasFiltered: ListaEESSPrecio[] = [];
   listaProvincias: ProvinciaResponse[] = [];
   provinciasLista: string[] = [];
+  carburanteList = ['Gasolina','Hidrogeno','Gasoleo'];
+  carburanteSelected = '';
+  provinciaSelected: String[] = [];
+  min = 1;
+  max = 5;
+  valor = 1;
 
-  constructor(private gasolineraService: GasolineraService) { }
-
-  formatLabel(value: number) {
-    if (value >= 1000) {
-      return Math.round(value / 1000) + 'k';
-    }
-
-    return value;
-  }
+  constructor(private gasolineraService: GasolineraService) {}
 
   ngOnInit(): void {
-    this.getGasolinera();
-  }
-
-  getGasolinera(){
     this.gasolineraService.getGasolineras().subscribe(resp => {
       this.listaGasolineras = resp.ListaEESSPrecio;
-    })
+      this.listaGasolinerasFiltered = resp.ListaEESSPrecio;
+    });
+     
+    this.gasolineraService.getProvincia().subscribe(resp => {
+      this.listaProvincias = resp;
+    });
   }
 
-  filterProvincia(){
-    this.listaGasolineras = this.listaGasolinerasFiltered;
-    if(this.listaGasolineras.length > 0){
-      let listaProvincias: ListaEESSPrecio[] = this.listaGasolineras.filter(lista => this.provinciasLista.includes(lista.IDProvincia))
-      this.listaGasolineras = listaProvincias
+  filtros(){
+    this.listaGasolinerasFiltered = this.listaGasolineras.filter(precioF => this.carburante(precioF));
+  }
+
+  carburante(precio: ListaEESSPrecio){
+    let precioFiltro = false;
+    if(this.carburanteSelected == 'Gasolina'){
+      precioFiltro = + precio['Precio Gasolina 95 E5'].replace(",",".") < this.max && this.provinciaSelected.includes(precio['IDProvincia']) ? true : false;
+    }else if(this.carburanteSelected == 'Hidrogeno'){
+      precioFiltro = + precio['Precio Hidrogeno'].replace(",",".") < this.max && this.provinciaSelected.includes(precio['IDProvincia']) ? true : false;
     }else{
-      this.getGasolinera();
+      precioFiltro = + precio['Precio Gasoleo A'].replace(",",".") < this.max && this.provinciaSelected.includes(precio['IDProvincia']) ? true : false;
     }
+    return precioFiltro;
   }
 
-  quitarFiltro(){
-    this.listaGasolineras = this.listaGasolinerasFiltered;
+  formatLabel(value: number) {
+    return value;
   }
 }

@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GasolineraComponent } from './components/gasolinera/gasolinera.component';
 import { MaterialImportsModule } from './modules/material-imports.interface';
 import { AppRoutingModule } from './app-routing.module';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,8 @@ import { AppRoutingModule } from './app-routing.module';
     HttpClientModule,
     MaterialImportsModule,
     AppRoutingModule,
+    ReactiveFormsModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

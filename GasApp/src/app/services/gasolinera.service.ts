@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { GasolineraResponse, ProvinciaResponse } from '../interfaces/gasolinera.interface';
+import { GasolineraResponse} from '../interfaces/gasolinera.interface';
+import { ProvinciaResponse } from '../interfaces/provincia.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class GasolineraService {
     return this.http.get<GasolineraResponse>(`https://raw.githubusercontent.com/Ale061202/GasApp/main/GasApp/raw-data/response.json`);
   }
 
-  getProvincia(): Observable<ProvinciaResponse>{
-    return this.http.get<ProvinciaResponse>(`https://raw.githubusercontent.com/Ale061202/GasApp/main/GasApp/raw-data/provincia.json`);
+  getProvincia(): Observable<ProvinciaResponse[]>{
+    return this.http.get<ProvinciaResponse[]>(`https://raw.githubusercontent.com/Ale061202/GasApp/main/GasApp/raw-data/provincia.json`);
   }
 }
