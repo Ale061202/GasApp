@@ -41,16 +41,12 @@ export class GasolineraComponent implements OnInit {
   carburante(precio: ListaEESSPrecio){
     let precioFiltro = false;
     if(this.carburanteSelected == 'Gasolina'){
-      precioFiltro = + precio['Precio Gasolina 95 E5'].replace(",",".") < this.max && this.provinciaSelected.includes(precio['IDProvincia']) ? true : false;
+      precioFiltro = + precio['Precio Gasolina 95 E5'].replace(",",".") < this.max ? true : false;
     }else if(this.carburanteSelected == 'Hidrogeno'){
-      precioFiltro = + precio['Precio Hidrogeno'].replace(",",".") < this.max && this.provinciaSelected.includes(precio['IDProvincia']) ? true : false;
+      precioFiltro = + precio['Precio Hidrogeno'].replace(",",".") < this.max ? true : false;
     }else{
-      precioFiltro = + precio['Precio Gasoleo A'].replace(",",".") < this.max && this.provinciaSelected.includes(precio['IDProvincia']) ? true : false;
+      precioFiltro = + precio['Precio Gasoleo A'].replace(",",".") < this.max ? true : false;
     }
     return precioFiltro;
-  }
-
-  formatLabel(value: number) {
-    return value;
   }
 }
