@@ -18,4 +18,13 @@ export class GasolineraService {
   getProvincia(): Observable<ProvinciaResponse[]>{
     return this.http.get<ProvinciaResponse[]>(`https://raw.githubusercontent.com/Ale061202/GasApp/main/GasApp/raw-data/provincia.json`);
   }
+
+
+  parseData(jsonString: string){
+    let jsonStringReplaced = jsonString.replace(/C\.P\./gi, 'cP');
+
+
+    let json: GasolineraResponse = JSON.parse(jsonStringReplaced);
+    return json.ListaEESSPrecio;
+  }
 }

@@ -1,7 +1,4 @@
-<div>
-  <button class="button" mat-raised-button color="primary" (click)="filtros()">
-    Filtrar
-  </button>
+<div>  
   <mat-card class="card">
     <h2>Precio</h2>
     <br />
@@ -19,12 +16,14 @@
       aria-labelledby="example-name-label"
     >
     </mat-slider>
-    <mat-form-field appearance="fill" style="margin: 5px">
+    <button class="button" mat-raised-button color="primary" (click)="carburante()">
+      Filtrar
+    </button>
+    <!--<mat-form-field appearance="fill" style="margin: 5px">
       <mat-label>Provincia</mat-label>
       <mat-select
         [(ngModel)]="provinciaSelected"
         multiple
-        (selectionChange)="filtros()"
       >
         <mat-option
           [value]="provincia.IDPovincia"
@@ -32,7 +31,7 @@
           >{{ provincia.Provincia }}</mat-option
         >
       </mat-select>
-    </mat-form-field>
+    </mat-form-field>-->
     <mat-form-field appearance="fill">
       <mat-label>Carburante</mat-label>
       <mat-select [(ngModel)]="carburanteSelected" name="Combustible">

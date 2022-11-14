@@ -32,21 +32,23 @@ export class GasolineraComponent implements OnInit {
     this.gasolineraService.getProvincia().subscribe(resp => {
       this.listaProvincias = resp;
     });
-  }
+  }  
 
-  filtros(){
-    this.listaGasolinerasFiltered = this.listaGasolineras.filter(precioF => this.carburante(precioF));
-  }
-
-  carburante(precio: ListaEESSPrecio){
-    let precioFiltro = false;
+  carburante(){
+    this.listaGasolineras = this.listaGasolinerasFiltered
     if(this.carburanteSelected == 'Gasolina'){
-      precioFiltro = + precio['Precio Gasolina 95 E5'].replace(",",".") < this.max ? true : false;
+    let  precioFiltro: ListaEESSPrecio[] = this.listaGasolineras.filter(precioF => this.min < Number.parseFloat(precioF['Precio Gasolina 95 E5'].replace(",",".")));
+    this.listaGasolineras = precioFiltro;
     }else if(this.carburanteSelected == 'Hidrogeno'){
-      precioFiltro = + precio['Precio Hidrogeno'].replace(",",".") < this.max ? true : false;
+    let  precioFiltro: ListaEESSPrecio[] = this.listaGasolineras.filter(precioF => this.min < Number.parseFloat(precioF['Precio Hidrogeno'].replace(",",".")));
+    this.listaGasolineras = precioFiltro;
     }else{
-      precioFiltro = + precio['Precio Gasoleo A'].replace(",",".") < this.max ? true : false;
+    let  precioFiltro: ListaEESSPrecio[] = this.listaGasolineras.filter(precioF => this.min < Number.parseFloat(precioF['Precio Gasoleo A'].replace(",",".")));
+    this.listaGasolineras = precioFiltro;
     }
-    return precioFiltro;
   }
+
+  formatLabel(value: number){{
+    return value;
+  }}
 }
