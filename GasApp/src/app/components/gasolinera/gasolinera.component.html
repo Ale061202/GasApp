@@ -1,38 +1,61 @@
 <div>
-    <button class="button" mat-raised-button color="primary" (click)="filtros()">Filtrar</button>
-    <mat-card class="card">
-        <h2>Precio</h2>
-        <br>
-        <mat-slider
-        class="example-margin"
-        [disabled]="false"
-        [invert]="false"
-        [max]="max"
-        [min]="min"
-        [step]="0.1"
-        [thumbLabel]="true"
-        [displayWith]="formatLabel"
-        [tickInterval]="1"
-        [vertical]="false"
-        aria-labelledby="example-name-label">
+  <button class="button" mat-raised-button color="primary" (click)="filtros()">
+    Filtrar
+  </button>
+  <mat-card class="card">
+    <h2>Precio</h2>
+    <br />
+    <mat-slider
+      class="example-margin"
+      [disabled]="false"
+      [invert]="false"
+      [max]="max"
+      [min]="min"
+      [step]="0.1"
+      [thumbLabel]="true"
+      [displayWith]="formatLabel"
+      [tickInterval]="1"
+      [vertical]="false"
+      aria-labelledby="example-name-label"
+    >
     </mat-slider>
-    <mat-form-field appearance="fill" style="margin: 5px;">
-        <mat-label>Provincia</mat-label>
-        <mat-select [(ngModel)]="provinciaSelected" multiple (selectionChange)="filtros()">
-          <mat-option [value]="provincia.IDPovincia" *ngFor="let provincia of listaProvincias">{{provincia.Provincia}}</mat-option>
-        </mat-select>
-      </mat-form-field>
-    </mat-card>
+    <mat-form-field appearance="fill" style="margin: 5px">
+      <mat-label>Provincia</mat-label>
+      <mat-select
+        [(ngModel)]="provinciaSelected"
+        multiple
+        (selectionChange)="filtros()"
+      >
+        <mat-option
+          [value]="provincia.IDPovincia"
+          *ngFor="let provincia of listaProvincias"
+          >{{ provincia.Provincia }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Carburante</mat-label>
+      <mat-select [(ngModel)]="carburanteSelected" name="Combustible">
+        <mat-option *ngFor="let carburante of carburanteList" value="{{ carburante }}">
+          {{ carburante }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-card>
 </div>
-<div>    
-    <mat-card class="card" *ngFor="let gaso of listaGasolineras">
-        <mat-card-title>Nombre : {{gaso['Rótulo']}}</mat-card-title>
-        <mat-card-content>
-            <p>Dirección : {{gaso['Dirección']}}<p>        
-            <p>Gasolina 95 : {{gaso['Precio Gasolina 95 E5']}} €<p>
-            <p>Gasoleo : {{gaso['Precio Gasoleo A']}} €<p>
-            <p>Hidrogeno : {{gaso['Precio Hidrogeno']}} €<p>
-            <p>Provincia : {{gaso['Provincia']}}</p>
-        </mat-card-content>
-    </mat-card>
+<div>
+  <mat-card class="card" *ngFor="let gaso of listaGasolineras">
+    <mat-card-title>Nombre : {{ gaso["Rótulo"] }}</mat-card-title>
+    <mat-card-content>
+      <p>Dirección : {{ gaso["Dirección"] }}</p>
+      <p></p>
+      <p>Gasolina 95 : {{ gaso["Precio Gasolina 95 E5"] }} €</p>
+      <p></p>
+      <p>Gasoleo : {{ gaso["Precio Gasoleo A"] }} €</p>
+      <p></p>
+      <p>Hidrogeno : {{ gaso["Precio Hidrogeno"] }} €</p>
+      <p></p>
+      <p>Provincia : {{ gaso["Provincia"] }}</p>
+    </mat-card-content>
+  </mat-card>
 </div>
